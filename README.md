@@ -29,12 +29,12 @@ Documentation
 The bulk of the documentation is stored in the `Resources/doc/index.md`
 file in this bundle:
 
-Read the [NeutronDataGridBundle documentation](Resources/doc/index.md)
+Read the [NeutronDataGridBundle documentation](https://github.com/neutron-project/datagrid-bundle/blob/master/Resources/doc/index.md)
 
 Installation
 ------------
 
-All the installation instructions are located in [documentation](Resources/doc/index.md).
+All the installation instructions are located in [documentation](https://github.com/neutron-project/datagrid-bundle/blob/master/Resources/doc/index.md).
 
 Reporting an issue or a feature request
 ---------------------------------------

@@ -401,7 +401,7 @@ If you use aggregate columns then you must add the following option in your colM
 **Important:** When setting *colModels* with *DataGridInterface::setColModel()* method you need to provide minimum options *array('name' => 'firstName', 'index' => u.firstName)*. 
 *Index* option is needed to build the query. *Name* option is needed to build the result.
 
-**Important:** You can use inner and left joins to build a query. *Fetch joins* are NOT supported.
+**Important:** You can use inner and left joins to build a query.
 
 **Note:** All options are converted to json objects and passed to jqgrid plugin.
 	     
@@ -506,12 +506,6 @@ See [installation](#installation)
 $ php app/console assets:install --symlink web
 ```
 
-**Note:** If you use *assetic* run the following command:
-
-``` bash
-$ php app/console assetic:dump
-```
-
 **Note:** See path to javascript files. It has to point to the files previously downloaded to your web root. 
 See [installation](#installation)
 
@@ -532,6 +526,7 @@ To set search operators use *DataGridInterface::setSearchOptions*. By default th
 
 **Important:** *MultipleGroup search* is not supported for now. 
 
+**Note:** Load some data to your database and you will see datagrid in action.
 
 That's it. You have created your first datagrid. For more documentation go to [jqgrid documentation](http://www.trirand.com/jqgridwiki/doku.php?id=wiki:jqgriddocs)
 For more configurations see: [DataGridInterface](../DataGrid/DataGridInterface.php)
