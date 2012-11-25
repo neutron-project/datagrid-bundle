@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+        <parameters>
+            <parameter key="neutron_data_grid.controller.datagrid.class">Neutron\DataGridBundle\Controller\DataGridController</parameter>
+            <parameter key="neutron_data_grid.factory.datagrid.class">Neutron\DataGridBundle\DataGrid\DataGridFactory</parameter>
+            <parameter key="neutron_data_grid.provider.class">Neutron\DataGridBundle\DataGrid\Provider\DataGridProvider</parameter>
+            <parameter key="neutron_data_grid.doctrine.orm.handler.datagrid.class">Neutron\DataGridBundle\Doctrine\ORM\DataGridHandler</parameter>
+            <parameter key="neutron_data_grid.twig.extension.datagrid.class">Neutron\DataGridBundle\Twig\Extension\DataGridExtension</parameter>
+        </parameters>
+
+    <services>
+        <service id="neutron_data_grid.controller.datagrid" class="%neutron_data_grid.controller.datagrid.class%">
+            <call method="setContainer">
+                <argument type="service" id="service_container" />
+            </call>
+        </service>
+
+        <service id="neutron_data_grid.factory.datagrid" class="%neutron_data_grid.factory.datagrid.class%" />
+
+        <service id="neutron_data_grid.provider" class="%neutron_data_grid.provider.class%">
+            <argument type="service" id="service_container" />
+            <argument type="collection" />
+        </service>
+
+        <service id="neutron_data_grid.doctrine.orm.handler.datagrid" class="%neutron_data_grid.doctrine.orm.handler.datagrid.class%">
+            <call method="setDispatcher">
+                <argument type="service" id="event_dispatcher" />
+            </call>
+        </service>
+
+        <service id="neutron_data_grid.twig.extension.datagrid" class="%neutron_data_grid.twig.extension.datagrid.class%">
+            <argument type="service" id="service_container" />
+
+            <tag name="twig.extension" />
+        </service>
+
+    </services>
+
+</container>

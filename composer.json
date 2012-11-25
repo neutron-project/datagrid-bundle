@@ -1,0 +1,21 @@
+{
+    "name":         "neutron/datagrid-bundle",
+    "description":  "This bundle provides easy creating of jqGrid datagrids",
+    "keywords":     ["datagrid, jqGrid, Symfony, jQuery"],
+    "type":         "symfony-bundle",
+    "license":      "MIT",
+    "authors":      [
+        {
+            "name":     "Nikolay Georgiev",
+            "email": "azazen09@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require":      {
+        "symfony/framework-bundle": ">=2.1,<2.3-dev"
+    },
+    "autoload":     {
+        "psr-0": { "Neutron\\DataGridBundle": "" }
+    },
+    "target-dir": "Neutron/DataGridBundle"
+}
