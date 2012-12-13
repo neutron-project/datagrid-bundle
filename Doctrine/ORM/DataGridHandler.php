@@ -135,14 +135,7 @@ class DataGridHandler extends AbstractDataGridHandler
         
         // we use addWhere/addHaving because if we add a where/having clause beforehand then it will be ignored.
         (count($orXWithWhere->getParts()) > 0) ? $qb->andWhere($orXWithWhere) : null;
-        (count($orXWithHaving->getParts()) > 0) ? $qb->andHaving($orXWithHaving) : null; 
-        
-        // used for MultiGroup search. Not enabled for now.
-        if (isset($filters['groups']) && is_array($filters['groups'])){
-            foreach ($filters['groups'] as $group){
-                $this->applyFilters($qb, (array)$group);
-            }
-        }
+        (count($orXWithHaving->getParts()) > 0) ? $qb->andHaving($orXWithHaving) : null;     
     }
     
     /**

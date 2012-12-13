@@ -31,9 +31,25 @@ jQuery(document).ready(function(){
         }
         
         var jqgrid = jQuery('#' + datagridId).jqGrid({
+            beforeSelectRow: function (rowid, e) {
 
+                var beforeRowSelect = jQuery.Event('neutron_datagrid.beforeRowSelect');
+                beforeRowSelect.gridId =  jQuery(this).attr('id');
+                beforeRowSelect.id = rowid;
+                beforeRowSelect.event = e;
+                jQuery('#neutron-datagrid-container-' + gridName).next()
+                    .trigger(beforeRowSelect);
+                
+                
+                if(options.multiselect){
+                    return false;
+                }
+            
+                return true;
+                
+            },
             onSelectRow: function(aRowids, status){ 
-               
+                         
                 /** Applying logic for mass actions  */
                 selectAll = false;
                 
@@ -51,18 +67,33 @@ jQuery(document).ready(function(){
                     })
                     .trigger('reloadGrid');
                 });
-   
+            
+                return true;
             },
 
             onSelectAll: function(aRowids, status){
-        
+              
+                var onSelectAll = jQuery.Event('neutron_datagrid.onSelectAll');
+                onSelectAll.gridId = jQuery(this).attr('id');
+                onSelectAll.status = status;
+                onSelectAll.ids = aRowids;
+                jQuery('#neutron-datagrid-container-' + gridName).next()
+                    .trigger(onSelectAll);
+              
                 /** Applying logic for mass actions  */
                 selectAll = false;
                 toggleMassActionBtns(jQuery(this), datagridId);
+                
+                return true;
             },
             
             gridComplete: function(){
-
+                
+                var gridComplete = jQuery.Event('neutron_datagrid.gridComplete');
+                gridComplete.gridId =  jQuery(this).attr('id');
+                jQuery('#neutron-datagrid-container-' + gridName).next()
+                    .trigger(gridComplete);
+                
                 // Activates multi select sortable element
                 if(options.multiSelectSortableEnabled == true){                      
                    
@@ -120,7 +151,7 @@ jQuery(document).ready(function(){
             grouping: options.groupingEnabled,
             groupingView: options.groupingViewOptions,
             rownumbers: options.rowNumbersEnabled,
-            multiselect: options.massActionsEnabled,
+            multiselect: options.multiselect,
             toolbar: [options.massActionsEnabled, "top"],
             forceFit: options.forceFit,
             shrinkToFit: options.shrinkToFit,
@@ -421,4 +452,3 @@ function buildErrorMessages(errors)
 
     return html;
 }
-

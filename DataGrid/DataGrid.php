@@ -173,6 +173,11 @@ class DataGrid implements DataGridInterface
      * @var string
      */
     protected $deleteBtnUri = null;
+    
+    /**
+     * @var boolean
+     */
+    protected $multiselect = false;
 
     /**
      * @var boolean
@@ -876,6 +881,26 @@ class DataGrid implements DataGridInterface
     {
         return $this->deleteBtnUri;
     }
+    
+    /**
+     * (non-PHPdoc)
+     * @see \Neutron\DataGridBundle\DataGrid\DataGridInterface::enableMultiSelect()
+     */
+    public function enableMultiSelect($bool)
+    {
+        $this->multiselect = (bool) $bool;
+        
+        return $this;
+    }
+    
+    /**
+     * (non-PHPdoc)
+     * @see \Neutron\DataGridBundle\DataGrid\DataGridInterface::isMultiSelectEnabled()
+     */
+    public function isMultiSelectEnabled()
+    {
+        return $this->multiselect;
+    }
 
     /**
      * (non-PHPdoc)
@@ -1054,6 +1079,7 @@ class DataGrid implements DataGridInterface
         $data['editBtnUri'] = $this->getEditBtnUri();
         $data['deleteBtnEnabled'] = $this->isDeleteButtonEnabled();
         $data['deleteBtnUri'] = $this->getDeleteBtnUri();
+        $data['multiselect'] = $this->isMultiSelectEnabled();
         $data['massActionsEnabled'] = $this->isMassActionsEnabled();
         $data['massActions'] = $this->getMassActions();
         $data['dependentDataGrids'] = $this->getDependentDataGrids();
@@ -1069,6 +1095,10 @@ class DataGrid implements DataGridInterface
     {
         if ($this->isSortableEnabled()){
             $this->enableSearchButton(false);
+        }
+        
+        if ($this->isMassActionsEnabled()){
+            $this->enableMultiSelect(true);
         }
     }
 }

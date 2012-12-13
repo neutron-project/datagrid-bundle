@@ -9,6 +9,8 @@
  */
 namespace Neutron\DataGridBundle\Controller;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\DependencyInjection\ContainerAware;
@@ -26,9 +28,6 @@ use Neutron\DataGridBundle\Event\RowEvent;
 use Neutron\DataGridBundle\DataGridEvents;
 
 use Neutron\DataGridBundle\DataGrid\DataGridInterface;
-
-use Symfony\Component\HttpFoundation\Response;
-
 
 /**
  * This controller handles ajax requests for managing datagrid
@@ -55,7 +54,7 @@ class DataGridController extends ContainerAware
             ->buildData()
         ;
                
-        return new Response(json_encode($handler->getProcessedData()));
+        return new JsonResponse($handler->getProcessedData());
     }
 
     /**
@@ -73,7 +72,7 @@ class DataGridController extends ContainerAware
         
         $this->container->get('event_dispatcher')->dispatch(DataGridEvents::onRowPositionChange, $event);
         
-        return new Response(json_encode($event->getExtraData()));
+        return new JsonResponse($event->getExtraData());
     }
 
     /**
@@ -105,7 +104,7 @@ class DataGridController extends ContainerAware
         $event = new MassActionEvent($name, $action, $ids, $selectAll, $handler->getQuery());
         $this->container->get('event_dispatcher')->dispatch(DataGridEvents::onMassAction, $event);
         
-        return new Response(json_encode($event->getExtraData()));
+        return new JsonResponse($event->getExtraData());
     }
 
     /**
@@ -127,14 +126,12 @@ class DataGridController extends ContainerAware
 
         $this->container->get('event_dispatcher')->dispatch($eventType, $event);
         
-        return new Response(json_encode(
-            array(
-                'errors'  => $event->getErrors(), 
-                'success' => $event->getSuccess(), 
-                'id'      => $event->getId(),
-                'data'    => $event->getData()
-            ))
-        );
+        return new JsonResponse(array(
+            'errors'  => $event->getErrors(), 
+            'success' => $event->getSuccess(), 
+            'id'      => $event->getId(),
+            'data'    => $event->getData()
+        ));
     }
 
     /**

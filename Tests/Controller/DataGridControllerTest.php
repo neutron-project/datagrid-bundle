@@ -141,7 +141,7 @@ class DataGridControllerTest extends BaseTestCase
         
         $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $result);
         
-        $this->assertSame(json_encode(array()), $result->getContent());    
+        $this->assertSame(json_encode(array(),  JSON_FORCE_OBJECT), $result->getContent());    
     }
     
     public function testMassAction()
@@ -158,7 +158,7 @@ class DataGridControllerTest extends BaseTestCase
         $result = $controller->massAction('test'); 
     
         $this->assertInstanceOf('Symfony\Component\HttpFoundation\Response', $result);
-        $this->assertSame(json_encode(array()), $result->getContent());
+        $this->assertSame(json_encode(array(),  JSON_FORCE_OBJECT), $result->getContent()); 
     }
     
     public function testMassActionWithInvalidAction()

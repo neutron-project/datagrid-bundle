@@ -373,7 +373,14 @@ class DataGridTest extends \PHPUnit_Framework_TestCase
         $this->assertArrayHasKey('deleteBtnUri', $dataGrid->exportOptions());
     }
     
-
+    public function testMultiSelect()
+    {
+        $dataGrid = $this->createDataGrid();
+        $this->assertFalse($dataGrid->isMultiSelectEnabled());
+        $dataGrid->enableMultiSelect(true);
+        $this->assertTrue($dataGrid->isMultiSelectEnabled());
+        $this->assertArrayHasKey('multiselect', $dataGrid->exportOptions());
+    }
 
     public function testMassActions()
     {
@@ -387,6 +394,7 @@ class DataGridTest extends \PHPUnit_Framework_TestCase
         $dataGrid->setMassActions($massActions);
         
         $this->assertTrue($dataGrid->isMassActionsEnabled());
+        
         $this->assertSame(
             $massActions, 
             $dataGrid->getMassActions()
@@ -394,6 +402,7 @@ class DataGridTest extends \PHPUnit_Framework_TestCase
         
         $this->assertArrayHasKey('massActionsEnabled', $dataGrid->exportOptions());
         $this->assertArrayHasKey('massActions', $dataGrid->exportOptions());
+        $this->assertTrue($dataGrid->isMultiSelectEnabled());
     }
     
     

@@ -10,8 +10,9 @@
         'select_action': 'select_action'|trans({}, translationDomain),
     }
 } %}
-
-<table data-options="{{ dataGrid.exportOptions|merge(options)|json_encode }}" class='neutron-datagrid' id="neutron-datagrid-{{ dataGrid.name }}"></table>
-<div id="neutron-datagrid-{{ dataGrid.name }}-pager"></div>
+<div id="neutron-datagrid-container-{{ dataGrid.name }}">
+    <table data-options="{{ dataGrid.exportOptions|merge(options)|json_encode }}" class='neutron-datagrid' id="neutron-datagrid-{{ dataGrid.name }}"></table>
+    <div id="neutron-datagrid-{{ dataGrid.name }}-pager"></div>
+</div>
 
 

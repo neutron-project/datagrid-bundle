@@ -584,9 +584,26 @@ interface DataGridInterface
      * @return string
      */
     public function getDeleteBtnUri ();
+    
+    /**
+     * Enables jqgrid multi select option
+     * 
+     * Provides a fluent interface
+     * 
+     * @param boolean $bool
+     * @return \Neutron\DataGridBundle\DataGrid\DataGridInterface
+     */
+    public function enableMultiSelect($bool);
+    
+    /**
+     * Check if multi select is enabled
+     * 
+     * @return boolean
+     */
+    public function isMultiSelectEnabled();
 
     /**
-     * Enables mass actions
+     * Enables mass actions and multi select.
      *
      * Provides a fluent interface
      *
@@ -596,7 +613,7 @@ interface DataGridInterface
     public function enableMassActions ($bool);
 
     /**
-     * Checks if mass actions are enabled
+     * Checks if mass actions are enabled. 
      *
      * @return bolean
      */
