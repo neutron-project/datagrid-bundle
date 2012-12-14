@@ -16,6 +16,20 @@ jQuery(document).ready(function(){
         /** Getting options of a grid by id */
         var options = jQuery(this).data('options');
         
+        var evaluateFn = function(options){
+            jQuery.each(options, function(k,v){
+                if(typeof(v) == 'string' && isNaN(v)){
+                    if(v.match('^function')){
+                        eval('options.'+ k +' = ' + v);
+                    }
+                } else if(jQuery.isPlainObject(v) || jQuery.isArray(v)){
+                    evaluateFn(v);
+                }
+            });
+        };
+        
+        evaluateFn(options); console.log(options);
+        
         var datatype = 'json';
         
         if(options.driver === 'array'){
