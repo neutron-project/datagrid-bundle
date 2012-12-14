@@ -46,19 +46,23 @@ jQuery(document).ready(function(){
         
         var jqgrid = jQuery('#' + datagridId).jqGrid({
             beforeSelectRow: function (rowid, e) {
+                
+                var isChecked = false;
+                
+                if(jQuery(e.target).is(':input')){
+                    isChecked = jQuery(e.target).is(':checked');
+                } else {
+                    isChecked = (jQuery("tr#"+rowid+".jqgrow > td > input.cbox", jQuery(this)).is(':checked') === false);
+                }
 
                 var beforeRowSelect = jQuery.Event('neutron_datagrid.beforeRowSelect');
                 beforeRowSelect.gridId =  jQuery(this).attr('id');
                 beforeRowSelect.id = rowid;
-                beforeRowSelect.event = e;
+                beforeRowSelect.isChecked = isChecked;
                 jQuery('#neutron-datagrid-container-' + gridName).next()
                     .trigger(beforeRowSelect);
                 
                 
-                if(options.multiselect){
-                    return false;
-                }
-            
                 return true;
                 
             },
