@@ -20,7 +20,7 @@
         "symfony/framework-bundle": ">=2.1,<2.3-dev"
     },
     "require-dev": {
-        "neutron/component-bundle": "*",
+        "neutron/component-bundle": "*"
     },
     "autoload":     {
         "psr-0": { "Neutron\\DataGridBundle": "" }
