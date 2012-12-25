@@ -1100,5 +1100,9 @@ class DataGrid implements DataGridInterface
         if ($this->isMassActionsEnabled()){
             $this->enableMultiSelect(true);
         }
+        
+        if ($this->isMultiSelectSortableEnabled()){
+            $this->enableMultiSelect(false);
+        }
     }
 }
