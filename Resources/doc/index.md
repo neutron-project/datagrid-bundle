@@ -32,7 +32,7 @@ Add on composer.json (see http://getcomposer.org/)
 
     "require" :  {
         // ...
-        "neutron-project/datagrid-bundle":"dev-master",
+        "neutron/datagrid-bundle":"dev-master",
     }
 
 ### Step 2) Register the bundle
