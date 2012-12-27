@@ -511,9 +511,18 @@ See [installation](#installation)
 
 ### Step 4) Render the datagrid with *neutron_datagrid* twig extension.
 
+Parameter *userManagementDataGrid* must be an instance of *DataGridInterface*
+
 ``` jinja
 <div>{{ neutron_datagrid(userManagementDataGrid) }}</div>
 ```
+
+or just provide datagrid alias. This way is more flexible because there is no need to get the datagrid from the provider.
+
+``` jinja
+<div>{{ neutron_datagrid('user_management') }}</div>
+```
+
 <a name="jqgrid-query-builder"></a>
 
 ### Using jqGrid query buider

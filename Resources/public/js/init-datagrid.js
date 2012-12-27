@@ -28,7 +28,7 @@ jQuery(document).ready(function(){
             });
         };
         
-        evaluateFn(options); console.log(options);
+        evaluateFn(options); 
         
         var datatype = 'json';
         

@@ -62,11 +62,15 @@ class DataGridExtension extends \Twig_Extension
     /**
      * Rendering initial content of the datagrid
      *
-     * @param string $name                     
+     * @param DataGridInterface|string $dataGrid                     
      * @return string (html response)
      */
-    public function dataGrid (DataGridInterface $dataGrid)
-    {
+    public function dataGrid ($dataGrid)
+    {   
+        if (!$dataGrid instanceof DataGridInterface){
+            $dataGrid = $this->container->get('neutron_data_grid.provider')->get($dataGrid);
+        }
+
         return $this->container->get('templating')->render(
             'NeutronDataGridBundle:DataGrid:index.html.twig', 
             array(
