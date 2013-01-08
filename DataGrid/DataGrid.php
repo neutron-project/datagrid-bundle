@@ -218,6 +218,11 @@ class DataGrid implements DataGridInterface
      * @var string
      */
     protected $multiSelectSortableColumn;
+    
+    /**
+     * @var array
+     */
+    protected $customButtons = array();
 
     /**
      * Constructor
@@ -1039,6 +1044,60 @@ class DataGrid implements DataGridInterface
     {
         return $this->multiSelectSortableColumn;
     }
+    
+    public function hasCustomButton($name)
+    {
+        return isset($this->customButtons[$name]);
+    }
+
+    public function addCustomButton(CustomButton $customButton)
+    {
+        if ($this->hasCustomButton($customButton->getName())){
+            throw new \InvalidArgumentException(
+                sprintf('CustomButton: "%s" already exists in the stack', $customButton->getName())
+            );
+        }
+    
+        $this->customButtons[$customButton->getName()] = $customButton;
+    
+        return $this;
+    }
+    
+    public function setCustomButtons(array $customButtons)
+    {
+        foreach ($customButtons as $customButton){
+            $this->addCustomButton($customButton);
+        }
+    
+        return $this;
+    }
+    
+    public function getCustomButton($name)
+    {
+        if (!$this->hasCustomButton($name)){
+            throw new \InvalidArgumentException(
+                sprintf('CustomButton: "%s" does not exist in the stack', $name)
+            );
+        }
+    
+        return $this->customButtons[$name];
+    }
+    
+    public function getCustomButtons()
+    {
+        return $this->customButtons;
+    }
+    
+    public function getcustomButtonsAsOptions()
+    {
+        $options = array();
+        
+        foreach ($this->getCustomButtons() as $customButton){
+            $options[$customButton->getName()] = $customButton->getOptions();
+        }
+        
+        return $options;
+    }
 
     /**
      * Exports this datagrid to an array
@@ -1087,6 +1146,7 @@ class DataGrid implements DataGridInterface
         $data['treeName'] = $this->getTreeName();
         $data['multiSelectSortableEnabled'] = $this->isMultiSelectSortableEnabled();
         $data['multiSelectSortableColumn'] = $this->getMultiSelectSortableColumn();
+        $data['customButtons'] = $this->getcustomButtonsAsOptions();
       
         return $data;
     }

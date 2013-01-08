@@ -187,7 +187,8 @@ jQuery(document).ready(function(){
         
 
         /** initializing pager */
-        jqgrid.jqGrid('navGrid', pager, 
+        var navGrid = 
+            jqgrid.jqGrid('navGrid', pager, 
             { 
                 search:options.searchBtnEnabled, 
                 edit:options.editBtnEnabled,
@@ -250,6 +251,9 @@ jQuery(document).ready(function(){
             }
         	
         });
+    
+        // custom buttons
+        addCustomButtons(jqgrid, navGrid, pager, options);
 
         /** Initializing mass actions */
         if(options.massActionsEnabled){
@@ -469,4 +473,43 @@ function buildErrorMessages(errors)
     html += '</ul>';
 
     return html;
+}
+
+function addCustomButtons(jqgrid, navGrid, pager, options)
+{   
+
+    jQuery.each(options.customButtons, function(k,v){
+        
+        navGrid.navButtonAdd(pager,{
+            caption:v.caption, 
+            title:v.title, 
+            buttonicon: v.buttonicon, 
+            onClickButton: function(){ 
+                var id = jqgrid.jqGrid('getGridParam','selrow');
+                selectedRow = jqgrid.getRowData(id);
+
+                if(id != null && selectedRow != null){ 
+                    var rowData = jQuery.extend({'id': id}, selectedRow);
+                    var uri = decodeURIComponent(v.uri);
+
+                    jQuery.each(rowData, function(k,v){
+                        uri = uri.replace('{' + k + '}', v);
+                    });
+
+                    window.location = uri;
+
+                } else {
+                    jQuery('<div></div>').html(options.custom_button_dlg_body).dialog({ 
+                        'title' : options.custom_button_dlg_title,
+                        'modal' : true,
+                    });
+                }
+
+                return false;
+            }, 
+            position:v.position
+        });
+        
+    });
+
 }

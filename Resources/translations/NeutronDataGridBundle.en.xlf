@@ -22,6 +22,16 @@
                 <target>Select action</target>
             </trans-unit>
             
+	        <trans-unit id="5">
+                <source>custom_button_dlg_title</source>
+                <target>Error</target>
+            </trans-unit>
+            
+	        <trans-unit id="6">
+                <source>custom_button_dlg_body</source>
+                <target>Please select row</target>
+            </trans-unit>
+            
         </body>
     </file>
 </xliff>
