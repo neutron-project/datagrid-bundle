@@ -1,6 +1,12 @@
 NeutronDataGridBundle
 =====================
 
+**Note:** This bundle has moved to
+[ThraceDatagridBundle](https://github.com/thrace-project/datagrid-bundle) under
+the [thrace-project](https://github.com/thrace-project) organization.
+
+----
+
 The `NeutronDataGridBundle` integrates the [jqgrid](https://github.com/tonytomov/jqGrid)
 jQuery plugin with Symfony2. This means easy-to-implement datagrids in your Symfony 2 application!
 
